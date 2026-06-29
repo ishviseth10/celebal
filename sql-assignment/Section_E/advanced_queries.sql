@@ -13,8 +13,7 @@ SELECT
     SUM(CASE WHEN status != 'Delivered' THEN 1 ELSE 0 END) AS not_delivered_count
 FROM orders;
 
-BEGIN;
-
+START TRANSACTION;
     INSERT INTO orders (order_id, customer_id, order_date, status, total_amount)
     VALUES (1011, 102, CURRENT_DATE, 'Pending', 1598.00);
 
@@ -31,11 +30,10 @@ BEGIN;
     UPDATE products
     SET    stock_qty = stock_qty - 1
     WHERE  product_id = 208;
-
 COMMIT;
 
-SELECT * FROM orders       WHERE order_id   = 1011;
-SELECT * FROM order_items  WHERE order_id   = 1011;
+SELECT * FROM orders WHERE order_id = 1011;
+SELECT * FROM order_items WHERE order_id = 1011;
 SELECT product_id, product_name, stock_qty
-FROM   products
-WHERE  product_id IN (206, 208);
+FROM products
+WHERE product_id IN (206, 208);

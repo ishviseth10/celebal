@@ -39,16 +39,10 @@ FROM   customers c
 RIGHT JOIN orders o ON c.customer_id = o.customer_id;
 
 SELECT c.customer_id, c.first_name, o.order_id
-FROM   customers c
-FULL OUTER JOIN orders o ON c.customer_id = o.customer_id
-WHERE  c.customer_id IS NULL
-    OR o.order_id    IS NULL;
-
-SELECT c.customer_id, c.first_name, o.order_id
 FROM   customers c LEFT JOIN orders o ON c.customer_id = o.customer_id
 UNION
 SELECT c.customer_id, c.first_name, o.order_id
 FROM   customers c RIGHT JOIN orders o ON c.customer_id = o.customer_id;
 
 INSERT INTO orders
-VALUES (1011, 999, '2024-09-01', 'Pending', 500.00);
+VALUES (1012, 999, '2024-09-01', 'Pending', 500.00);
